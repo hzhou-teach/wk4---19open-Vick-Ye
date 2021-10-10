@@ -15,7 +15,7 @@ int b[100];
 std::vector<int> path[99];
 
 void addIndirectPath(int f) {
-	//loop through entrances and added entrances
+	//loop through entrances
 	std::vector<int> newPath;
 	for(auto iterator = path[f].begin(); iterator != path[f].end(); iterator++) {
 		int entranceFactory = *iterator;
@@ -34,7 +34,7 @@ void addIndirectPath(int f) {
 			path[f].push_back(*iterator);
 		}
 
-		//if added path, test for more indirect paths
+		//if added path, test for new indirect paths
 		addIndirectPath(f);
 	}
 }
@@ -64,7 +64,6 @@ int main() {
 	int walkways = -1;
 
 	//store direct path based on destination
-	//paths = N - 1
 	for(int i = 0; i < pathAmt; i++) {
 		int pathStart = a[i];
 		int pathEnd = b[i];
@@ -72,8 +71,7 @@ int main() {
 		path[pathEnd].push_back(pathStart);
 	}
 	
-	//add indirect destinations
-	
+	//add indirect paths
 	for(int i = 0; i < N; i++) {
 		addIndirectPath(i);
 	}
